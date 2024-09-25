@@ -1,0 +1,3 @@
+user default off
+user asghar on sanitize-payload #d30ca19d599be083891f2d25e43c92881eeaf120f6db539344969e8a5d154d47 ~* &* +@all
+user another-user on sanitize-payload #<another-user digested password> +@string +multi ~ro_gw:*
