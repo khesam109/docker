@@ -1,0 +1,2 @@
+chain certicates.
+note that this file should be in pem format. it seems that redis can not parse der format

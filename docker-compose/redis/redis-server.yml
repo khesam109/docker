@@ -1,0 +1,38 @@
+version: '3.9'
+
+volumes:
+  redis-storage:
+    driver: local
+  sentinal-storage:
+    driver: local
+
+networks:
+  redis-network:
+    external: true
+
+
+services:
+  redis-instance:
+    image: bitnami/redis:latest
+    container_name: redis-instance
+    hostname: r1.redis-cluster.com
+    # restart: on-failure
+
+    ports:
+      - '8585:8585'
+
+    environment:
+      - ALLOW_EMPTY_PASSWORD=no
+      - REDIS_PASSWORD=xxx
+      - REDIS_OVERRIDES_FILE=/bitnami/redis/mounted-etc/overrides.conf
+
+    volumes:
+#      - redis-storage:/data
+      - ./data:/bitnami/redis/data
+      - ./config/overrides.conf:/bitnami/redis/mounted-etc/overrides.conf
+      - ./config/users.acl:/bitnami/redis/mounted-etc/users.acl
+      - ./ssl:/bitnami/redis/ssl
+      - ./logs:/bitnami/redis/logs
+
+    networks:
+      - redis-network
